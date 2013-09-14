@@ -71,8 +71,8 @@ module Everlane
     end
 
     def dial(positions)
-      positions.map do |p|
-        @values[normalize_position(p, @pin)]
+      positions.map do |pos|
+        @values[normalize_position(pos, @pin)]
       end
     end
 
