@@ -1,0 +1,26 @@
+require 'rake/testtask'
+
+$LOAD_PATH.unshift File.expand_path("../lib", __FILE__)
+require 'everlane'
+
+Rake::TestTask.new do |t|
+ t.libs << 'spec'
+ t.pattern = 'spec/**/*_spec.rb'
+end
+task :default => :test
+
+
+desc "Everlane example"
+task :nan do
+  decoder = Everlane::DecoderRing.new("abcdefghijklmnopqrstuvwxyz".split(''))
+  cipher = Everlane::RotoCipher.new(decoder)
+
+  puts cipher.rotx(10, 'Hello, World')
+  # => "Rovvy, Gybvn"
+  puts cipher.rotx 10, 'Rovvy, Gybvn', false
+  # => "Hello, World"
+
+  # Rotation numbers greater than 26 should work as well
+  puts cipher.rotx 36, 'Hello, World'
+  # => "Rovvy, Gybvn"
+end
