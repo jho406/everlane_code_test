@@ -2,18 +2,17 @@ require 'test_helper'
 
 describe Everlane::RotoCipher do
   before do
-    @decoder = Everlane::DecoderRing.new("abcdefghijklmnopqrstuvwxyz".split(''))
-    @cipher = Everlane::RotoCipher.new(@decoder)
-  end
-
-  after do
-    @decoder.reset_pin
+    @cipher = Everlane::RotoCipher
   end
 
   describe '#rotx' do
     describe 'when encrypting' do
       it 'should encrypt a lower case string' do
         @cipher.rotx(10, 'hello').must_equal 'rovvy'
+      end
+
+      it 'should wrap around' do
+        @cipher.rotx(25, 'zebra', false).must_equal 'afcsb'
       end
 
       it 'should encrypt uppers and lowers respectively' do
