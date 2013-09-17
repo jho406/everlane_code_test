@@ -12,15 +12,15 @@ task :default => :test
 
 desc "Everlane example"
 task :nan do
-  decoder = Everlane::DecoderRing.new("abcdefghijklmnopqrstuvwxyz".split(''))
-  cipher = Everlane::RotoCipher.new(decoder)
-
+  cipher = Everlane::RotoCipher
+  puts "cipher.rotx(10, 'Hello, World')"
   puts cipher.rotx(10, 'Hello, World')
-  # => "Rovvy, Gybvn"
+  puts
+  puts "cipher.rotx 10, 'Rovvy, Gybvn', false"
   puts cipher.rotx 10, 'Rovvy, Gybvn', false
-  # => "Hello, World"
-
+  puts
   # Rotation numbers greater than 26 should work as well
+  puts "cipher.rotx 36, 'Hello, World'"
   puts cipher.rotx 36, 'Hello, World'
   # => "Rovvy, Gybvn"
 end
